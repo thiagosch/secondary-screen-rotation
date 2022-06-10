@@ -1,6 +1,6 @@
 import rotatescreen
 import keyboard
-
+import os
 from infi.systray import SysTrayIcon
 states = {"primarystate": 0, "secondarystate": 270}
 primarystate = 0
@@ -41,10 +41,6 @@ def setrotationparams(state):
     states["secondarystate"] = state[1]
 
 
-def test(systray):
-    print(states)
-
-
 menu_options = (
     ("reset rotation", None, say_hello),
     ("set rotation 0-270", None, lambda systray:  setrotationparams([0, 270])),
@@ -55,7 +51,12 @@ menu_options = (
     ("set secondary as primary", None, lambda systray: setrotationparams([states["secondarystate"], states["primarystate"]])),)
 
 
-systray = SysTrayIcon("icon.ico", "Screen rotation", menu_options)
+def on_quit_callback(systray):
+    os._exit(1)
+
+
+systray = SysTrayIcon("icon.ico", "Screen rotation",
+                      menu_options, on_quit=on_quit_callback)
 settrayIconTo(rotatescreen.get_secondary_displays()[0].current_orientation)
 systray.start()
 

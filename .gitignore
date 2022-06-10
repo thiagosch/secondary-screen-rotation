@@ -1,0 +1,5 @@
+#build files & folders
+/build
+/dist
+
+/rotate screen.spec
