@@ -49,7 +49,7 @@ def setrotationparams(state):
 
 
 menu_options = (
-    ("reset rotation", None, say_hello),
+    ("reset rotation", None, lambda systray: rotatesecondary(True)),
     ("set rotation 0-270", None, lambda systray:  setrotationparams([0, 270])),
     ("set rotation 0-90", None, lambda systray:  setrotationparams([0, 90])),
     ("set rotation 0-180", None, lambda systray:  setrotationparams([0, 180])),
