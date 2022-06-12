@@ -1,10 +1,22 @@
 import rotatescreen
 import keyboard
 import os
+import sys
 from infi.systray import SysTrayIcon
 states = {"primarystate": 0, "secondarystate": 270}
 primarystate = 0
 secondarystate = 270
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 
 def rotatesecondary(resetvalue=False):
@@ -19,21 +31,16 @@ def rotatesecondary(resetvalue=False):
 
 
 def settrayIconTo(value):
-    match value:
-        case 0:
-            Icon = "landscape.ico"
-        case 90:
-            Icon = "portrait.ico"
-        case 180:
-            Icon = "landscapeF.ico"
-        case 270:
-            Icon = "portraitF.ico"
+    print(resource_path("images/landscape.ico"))
+    if(value == 0):
+        Icon = resource_path("images/landscape.ico")
+    elif value == 90:
+        Icon = resource_path("images/portrait.ico")
+    elif value == 180:
+        Icon = resource_path("images/landscapeF.ico")
+    elif value == 270:
+        Icon = resource_path("images/portraitF.ico")
     systray.update(icon=Icon)
-
-
-def say_hello(systray):
-    rotatesecondary(True)
-    return
 
 
 def setrotationparams(state):
@@ -59,12 +66,8 @@ systray = SysTrayIcon("icon.ico", "Screen rotation",
                       menu_options, on_quit=on_quit_callback)
 settrayIconTo(rotatescreen.get_secondary_displays()[0].current_orientation)
 systray.start()
-
-
 screen = rotatescreen.get_secondary_displays()[0]
-# rotatescreen.get_secondary_displays()[0].rotate_to(90)
 
 
 keyboard.add_hotkey("ctrl+alt+j", rotatesecondary)
-
 keyboard.wait()
