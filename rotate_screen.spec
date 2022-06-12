@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['rotate screen.py'],
+    ['rotate_screen.py'],
     pathex=[],
     binaries=[],
     datas=[('images', 'images')],
