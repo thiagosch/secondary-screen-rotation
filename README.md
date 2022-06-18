@@ -2,7 +2,7 @@
 windows application to toggle second monitor between two rotations. 
 
 
-On the system tray menu you can change the position to toggle between.
+On the settings window you can change the position to toggle between, and shortcuts/key to be used.
 
 Set your primary rotation state by pressing "reset rotation" or doble click on the systray icon.
 
