@@ -5,10 +5,10 @@ block_cipher = None
 
 
 a = Analysis(
-    ['rotate_screen.py'],
+    ['primary.py'],
     pathex=[],
     binaries=[],
-    datas=[('images', 'images')],
+    datas=[('images', 'images'),('d:\\users\\thtst\\documents\\github\\secondary-screen-rotation\\venv\\lib\\site-packages', '.')],
     hiddenimports=['pkg_resources', 'infi.systray'],
     hookspath=[],
     hooksconfig={},
@@ -19,6 +19,7 @@ a = Analysis(
     cipher=block_cipher,
     noarchive=False,
 )
+
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 
 exe = EXE(
@@ -43,3 +44,4 @@ exe = EXE(
     entitlements_file=None,
     icon='images\\landscape.ico'
 )
+
